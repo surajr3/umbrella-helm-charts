@@ -5,7 +5,7 @@
 replicaCount: 2
 
 image:
-  repository: acrtestdreamdemo.azurecr.io/vault:v1
+  repository: acrtestdreamdemo.azurecr.io/vault
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
