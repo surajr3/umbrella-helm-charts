@@ -35,8 +35,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: ""
-  CONTAINER_NAME: "acrtestdreamdemo"
+  AZURE_CONTAINER_REGISTRY: "acrtestdreamdemo"
+  CONTAINER_NAME: "vault"
   RESOURCE_GROUP: "app-service-demo"
   CLUSTER_NAME: "aks-test"
   # DEPLOYMENT_MANIFEST_PATH: "your-deployment-manifest-path"
