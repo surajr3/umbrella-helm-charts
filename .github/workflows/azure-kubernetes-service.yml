@@ -111,5 +111,4 @@ jobs:
           --wait \
           --namespace test \
           python-app \
-          ./charts-api \
-          --set image.tag=${{ github.sha }}
+          ./charts-api
