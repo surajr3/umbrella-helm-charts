@@ -35,11 +35,11 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "your-azure-container-registry"
-  CONTAINER_NAME: "your-container-name"
-  RESOURCE_GROUP: "your-resource-group"
-  CLUSTER_NAME: "your-cluster-name"
-  DEPLOYMENT_MANIFEST_PATH: "your-deployment-manifest-path"
+  AZURE_CONTAINER_REGISTRY: ""
+  CONTAINER_NAME: "acrtestdreamdemo"
+  RESOURCE_GROUP: "app-service-demo"
+  CLUSTER_NAME: "aks-test"
+  # DEPLOYMENT_MANIFEST_PATH: "your-deployment-manifest-path"
 
 jobs:
   buildImage:
@@ -99,13 +99,13 @@ jobs:
           use-kubelogin: 'true'
 
       # Deploys application based on given manifest file
-      - name: Deploys application
-        uses: Azure/k8s-deploy@v4
-        with:
-          action: deploy
-          manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-          images: |
-            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+      # - name: Deploys application
+      #   uses: Azure/k8s-deploy@v4
+      #   with:
+      #     action: deploy
+      #     manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+      #     images: |
+      #       ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
 
       - name: Run Helm Deploy
         run: |
@@ -113,7 +113,7 @@ jobs:
           --install \
           --create-namespace \
           --wait \
-          --namespace production \
-          akstestpubacr \
-          ./charts-test \
-          --set image.tag=latest
+          --namespace test \
+          python-app \
+          ./charts-api \
+          --set image.tag=${{ github.sha }}
